@@ -6,7 +6,7 @@ var Cabecera = require('./Cabecera.jsx');
 var NuevaPartida = require('./NuevaPartida.jsx');
 
 var JUGADORX = "jugador 1 - las X";
-var JUGADOR0 = "jugador 2 - los 0";
+var JUGADOR0 = "jugador 2 - los O";
 
 var JUGANDO = 0;
 var GANANX = 1;
@@ -25,7 +25,7 @@ var App = React.createClass({
 	},
 	appClick: function appClick(numeroFila, numeroColumna) {
 		var valores = this.state.valores;
-		var nuevoValor = this.state.turno === JUGADORX ? 'X' : '0';
+		var nuevoValor = this.state.turno === JUGADORX ? 'X' : 'O';
 		valores[numeroFila][numeroColumna] = nuevoValor;
 		this.setState({
 			valores: this.state.valores,
