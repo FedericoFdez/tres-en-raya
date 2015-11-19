@@ -3,6 +3,7 @@
 
 var Tablero = require('./Tablero.jsx');
 var Cabecera = require('./Cabecera.jsx');
+var NuevaPartida = require('./NuevaPartida.jsx');
 
 var JUGADORX = "jugador 1 - las X";
 var JUGADOR0 = "jugador 2 - los 0";
@@ -30,6 +31,13 @@ var App = React.createClass({
 			valores: this.state.valores,
 			partida: this.comprobarVictoria(this.state.valores, this.state.turno),
 			turno: this.state.turno === JUGADORX ? JUGADOR0 : JUGADORX
+		});
+	},
+	resetClick: function resetClick() {
+		this.setState({
+			turno: JUGADORX,
+			valores: [['-', '-', '-'], ['-', '-', '-'], ['-', '-', '-']],
+			partida: JUGANDO
 		});
 	},
 	comprobarVictoria: function comprobarVictoria(valores, turno) {
@@ -70,6 +78,7 @@ var App = React.createClass({
 			'div',
 			null,
 			React.createElement(Cabecera, { texto: texto }),
+			React.createElement(NuevaPartida, { manejadorResetClick: this.resetClick }),
 			React.createElement(Tablero, { valores: this.state.valores, manejadorTableroClick: this.appClick, partida: this.state.partida })
 		);
 	}
@@ -77,7 +86,7 @@ var App = React.createClass({
 
 module.exports = App;
 
-},{"./Cabecera.jsx":2,"./Tablero.jsx":4}],2:[function(require,module,exports){
+},{"./Cabecera.jsx":2,"./NuevaPartida.jsx":4,"./Tablero.jsx":5}],2:[function(require,module,exports){
 "use strict";
 
 var Cabecera = React.createClass({
@@ -130,6 +139,26 @@ module.exports = Casilla;
 },{}],4:[function(require,module,exports){
 "use strict";
 
+var NuevaPartida = React.createClass({
+	displayName: "NuevaPartida",
+
+	resetClick: function resetClick() {
+		this.props.manejadorResetClick();
+	},
+	render: function render() {
+		return React.createElement(
+			"button",
+			{ onClick: this.resetClick },
+			"Nueva Partida"
+		);
+	}
+});
+
+module.exports = NuevaPartida;
+
+},{}],5:[function(require,module,exports){
+"use strict";
+
 var Casilla = require("./Casilla.jsx");
 
 var Tablero = React.createClass({
@@ -165,11 +194,11 @@ var Tablero = React.createClass({
 
 module.exports = Tablero;
 
-},{"./Casilla.jsx":3}],5:[function(require,module,exports){
+},{"./Casilla.jsx":3}],6:[function(require,module,exports){
 "use strict";
 
 var App = require("./App.jsx");
 
 ReactDOM.render(React.createElement(App, null), document.getElementById('contenedor'));
 
-},{"./App.jsx":1}]},{},[5]);
+},{"./App.jsx":1}]},{},[6]);

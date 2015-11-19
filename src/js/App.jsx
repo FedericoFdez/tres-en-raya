@@ -1,5 +1,6 @@
 const Tablero = require('./Tablero.jsx');
 const Cabecera = require('./Cabecera.jsx');
+const NuevaPartida = require('./NuevaPartida.jsx')
 
 const JUGADORX = "jugador 1 - las X";
 const JUGADOR0 = "jugador 2 - los 0";
@@ -31,6 +32,17 @@ var App = React.createClass({
 			turno: this.state.turno === JUGADORX ? JUGADOR0:JUGADORX,
 		});
 	},
+	resetClick: function(){
+		this.setState({
+			turno: JUGADORX,
+			valores: [
+				['-', '-', '-'],
+				['-', '-', '-'],
+				['-', '-', '-']
+			],
+			partida: JUGANDO
+		})
+	},
 	comprobarVictoria: function(valores, turno){
 		for (var i=0; i<valores.length; i++){	
 			if ((valores[i][0]!=='-' && valores[i][0]===valores[i][1] && valores[i][1]===valores[i][2]) || //Horizontales
@@ -60,6 +72,7 @@ var App = React.createClass({
 		return (
 			<div>
 				<Cabecera texto={texto}/>
+				<NuevaPartida manejadorResetClick={this.resetClick}/>
 				<Tablero valores={this.state.valores} manejadorTableroClick={this.appClick} partida={this.state.partida}/>
 			</div>
 		)
