@@ -13,7 +13,8 @@ var Tablero = React.createClass({
 							 indiceFila={indiceFila}
 							 indiceColumna={indiceColumna}
 							 key={mykey}
-							 manejadorCasillaClick={this.tableroClick}/>
+							 manejadorCasillaClick={this.tableroClick}
+							 partida={this.props.partida}/>
 				)
 			}.bind(this));
 			return (
@@ -29,4 +30,5 @@ var Tablero = React.createClass({
 		);
 	}
 });
+
 module.exports = Tablero;

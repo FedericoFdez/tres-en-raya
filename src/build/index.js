@@ -3,8 +3,13 @@
 
 var Tablero = require('./Tablero.jsx');
 var Cabecera = require('./Cabecera.jsx');
+
 var JUGADORX = "jugador 1 - las X";
 var JUGADOR0 = "jugador 2 - los 0";
+
+var JUGANDO = 0;
+var GANANX = 1;
+var GANAN0 = 2;
 
 var App = React.createClass({
 	displayName: 'App',
@@ -12,7 +17,8 @@ var App = React.createClass({
 	getInitialState: function getInitialState() {
 		return {
 			turno: JUGADORX,
-			valores: [['-', '-', '-'], ['-', '-', '-'], ['-', '-', '-']]
+			valores: [['-', '-', '-'], ['-', '-', '-'], ['-', '-', '-']],
+			partida: JUGANDO
 		};
 	},
 	appClick: function appClick(numeroFila, numeroColumna) {
@@ -20,9 +26,31 @@ var App = React.createClass({
 		var nuevoValor = this.state.turno === JUGADORX ? 'X' : '0';
 		valores[numeroFila][numeroColumna] = nuevoValor;
 		this.setState({
-			turno: this.state.turno === JUGADORX ? JUGADOR0 : JUGADORX,
-			valores: this.state.valores
+			valores: this.state.valores,
+			partida: this.comprobarVictoria(this.state.valores, this.state.turno),
+			turno: this.state.turno === JUGADORX ? JUGADOR0 : JUGADORX
 		});
+	},
+	comprobarVictoria: function comprobarVictoria(valores, turno) {
+		for (var i = 0; i < valores.length; i++) {
+			if (valores[i][0] !== '-' && valores[i][0] === valores[i][1] && valores[i][1] === valores[i][2] || //Horizontales
+			valores[0][i] !== '-' && valores[0][i] === valores[1][i] && valores[1][i] === valores[2][i]) {
+				//Verticales
+				setTimeout(function () {
+					alert("GANA el " + turno);
+				}, 100);
+				return valores[i][0] === '0' ? GANAN0 : GANANX;
+			}
+		}
+		if (valores[0][0] !== '-' && valores[0][0] === valores[1][1] && valores[1][1] === valores[2][2] || //Diagonal 1
+		valores[0][2] !== '-' && valores[0][2] === valores[1][1] && valores[1][1] === valores[2][0]) {
+			//Diagonal 2
+			setTimeout(function () {
+				alert("GANA el " + turno);
+			}, 100);
+			return valores[1][1] === '0' ? GANAN0 : GANANX;
+		}
+		return JUGANDO;
 	},
 	render: function render() {
 		var texto;
@@ -31,7 +59,7 @@ var App = React.createClass({
 			'div',
 			null,
 			React.createElement(Cabecera, { texto: texto }),
-			React.createElement(Tablero, { valores: this.state.valores, manejadorTableroClick: this.appClick })
+			React.createElement(Tablero, { valores: this.state.valores, manejadorTableroClick: this.appClick, partida: this.state.partida })
 		);
 	}
 });
@@ -67,14 +95,20 @@ var Casilla = React.createClass({
 	displayName: 'Casilla',
 
 	casillaClick: function casillaClick() {
-		if (this.props.valor === "-") {
+		if (this.props.partida === 0 && this.props.valor === "-") {
 			this.props.manejadorCasillaClick(this.props.indiceFila, this.props.indiceColumna);
 		}
+	},
+	esClickable: function esClickable() {
+		if (this.props.partida !== 0 || this.props.valor !== "-") {
+			return "no_clickable";
+		}
+		return "clickable";
 	},
 	render: function render() {
 		return React.createElement(
 			'button',
-			{ style: casillaStyle, className: this.props.valor === "-" ? "clickable" : "no_clickable", onClick: this.casillaClick },
+			{ style: casillaStyle, className: this.esClickable(), onClick: this.casillaClick },
 			this.props.valor
 		);
 	}
@@ -101,7 +135,8 @@ var Tablero = React.createClass({
 					indiceFila: indiceFila,
 					indiceColumna: indiceColumna,
 					key: mykey,
-					manejadorCasillaClick: this.tableroClick });
+					manejadorCasillaClick: this.tableroClick,
+					partida: this.props.partida });
 			}).bind(this));
 			return React.createElement(
 				"div",
@@ -116,6 +151,7 @@ var Tablero = React.createClass({
 		);
 	}
 });
+
 module.exports = Tablero;
 
 },{"./Casilla.jsx":3}],5:[function(require,module,exports){
