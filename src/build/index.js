@@ -10,6 +10,7 @@ var JUGADOR0 = "jugador 2 - los 0";
 var JUGANDO = 0;
 var GANANX = 1;
 var GANAN0 = 2;
+var EMPATE = 3;
 
 var App = React.createClass({
 	displayName: 'App',
@@ -50,7 +51,17 @@ var App = React.createClass({
 			}, 100);
 			return valores[1][1] === '0' ? GANAN0 : GANANX;
 		}
-		return JUGANDO;
+		for (var i = 0; i < valores.length; i++) {
+			for (var j = 0; j < valores.length; j++) {
+				if (valores[i][j] === '-') {
+					return JUGANDO;
+				}
+			}
+		}
+		setTimeout(function () {
+			alert("EMPATE");
+		}, 100);
+		return EMPATE;
 	},
 	render: function render() {
 		var texto;

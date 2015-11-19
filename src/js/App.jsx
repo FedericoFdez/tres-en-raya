@@ -7,6 +7,7 @@ const JUGADOR0 = "jugador 2 - los 0";
 const JUGANDO  = 0;
 const GANANX   = 1;
 const GANAN0   = 2;
+const EMPATE   = 3;
 
 var App = React.createClass({
 	getInitialState: function(){
@@ -43,7 +44,15 @@ var App = React.createClass({
 			setTimeout(function(){alert("GANA el "+turno)},100)
 			return valores[1][1]==='0' ? GANAN0 : GANANX;
 		}
-		return JUGANDO;
+		for (var i=0; i<valores.length; i++){
+			for (var j=0; j<valores.length; j++){
+				if (valores[i][j]==='-'){
+					return JUGANDO;
+				}
+			}
+		}
+		setTimeout(function(){alert("EMPATE")},100)
+		return EMPATE;
 	},
 	render: function(){
 		var texto;
