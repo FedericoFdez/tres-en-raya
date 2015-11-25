@@ -1,9 +1,12 @@
+var React = require('react');
+var ReactDOM = require('react-dom');
+
 let NuevaPartida = React.createClass({
 	resetClick: function(){
 		this.props.manejadorResetClick()
 	},
 	render: function(){
-		return (<button  onClick={this.resetClick}>
+		return (<button bsSize="large" onClick={this.resetClick}>
 				Nueva Partida
 			</button>
 		)
@@ -11,3 +14,4 @@ let NuevaPartida = React.createClass({
 })
 
 module.exports = NuevaPartida;
+
