@@ -1,3 +1,5 @@
+import { Button } from 'react-bootstrap';
+
 var React = require('react');
 var ReactDOM = require('react-dom');
 
@@ -6,9 +8,9 @@ let NuevaPartida = React.createClass({
 		this.props.manejadorResetClick()
 	},
 	render: function(){
-		return (<button bsSize="large" onClick={this.resetClick}>
+		return (<Button bsSize="large" onClick={this.resetClick}>
 				Nueva Partida
-			</button>
+			</Button>
 		)
 	}
 })

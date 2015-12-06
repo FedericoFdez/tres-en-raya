@@ -22,9 +22,9 @@ let Casilla = React.createClass({
 	},
 	render: function(){
 		return (
-			<button bsStyle="primary" style={casillaStyle} className={this.esClickable()} onClick={this.casillaClick}>
+			<Button bsStyle="primary" style={casillaStyle} className={this.esClickable()} onClick={this.casillaClick}>
 				{this.props.valor}
-			</button>
+			</Button>
 			)
 	}
 });
