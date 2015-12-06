@@ -1,6 +1,6 @@
 {
   "name": "tres-en-raya",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "Proyecto de la asignatura Ingeniería Web",
   "main": "index.js",
   "scripts": {
