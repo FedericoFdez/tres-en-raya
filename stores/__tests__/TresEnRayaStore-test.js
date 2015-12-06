@@ -30,6 +30,7 @@ describe('TresEnRayaStore', function () {
 	});
 	it('reiniciar la partida', function () {
 		callback(actionReiniciarPartida)
+		var valores = TresEnRayaStore.getValores();
 		expect(valores[0][0]).toEqual('-');
 	});
 });
