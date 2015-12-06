@@ -1,7 +1,15 @@
+header, h1 {
+	text-align: center;
+}
+
+#contenedor {
+	text-align: center;
+}
+
 .clickable {
 	cursor: pointer;
 }
 
 .no_clickable {
-	cursor: not-allowed;
+	cursor: not-allowed !important;
 }
