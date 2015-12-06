@@ -1,3 +1,5 @@
+"use strict";
+
 const EventEmitter = require('events').EventEmitter;
 
 var TresEnRayaDispatcher = require('../dispatchers/TresEnRayaDispatcher.js');
