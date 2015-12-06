@@ -5,7 +5,7 @@ module.exports = {
 	},
 	CHANGE_EVENT: 'change',
 	JUGADORX : "jugador 1 - las X",
-	JUGADOR0 : "jugador 2 - los 0",
+	JUGADOR0 : "jugador 2 - los O",
 	JUGANDO : 0,
 	GANANX : 1,
 	GANAN0 : 2,

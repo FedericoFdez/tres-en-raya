@@ -111,7 +111,11 @@ var Casilla = React.createClass({
 		return React.createElement(
 			_reactBootstrap.Button,
 			{ bsStyle: 'primary', style: casillaStyle, className: this.props.valor === "-" ? "clickable" : "no_clickable", onClick: this.casillaClick },
-			this.props.valor
+			React.createElement(
+				'span',
+				{ className: 'btn-text' },
+				this.props.valor
+			)
 		);
 	}
 });
@@ -187,7 +191,7 @@ module.exports = {
 	},
 	CHANGE_EVENT: 'change',
 	JUGADORX: "jugador 1 - las X",
-	JUGADOR0: "jugador 2 - los 0",
+	JUGADOR0: "jugador 2 - los O",
 	JUGANDO: 0,
 	GANANX: 1,
 	GANAN0: 2,
@@ -35360,7 +35364,7 @@ var TresEnRayaStore = Object.assign({}, EventEmitter.prototype, {
 				setTimeout(function () {
 					alert("GANA el " + turno);
 				}, 100);
-				return valores[i][0] === '0' ? Constants.GANAN0 : Constants.GANANX;
+				return valores[i][0] === 'O' ? Constants.GANAN0 : Constants.GANANX;
 			}
 		}
 		if (valores[0][0] !== '-' && valores[0][0] === valores[1][1] && valores[1][1] === valores[2][2] || //Diagonal 1
@@ -35369,7 +35373,7 @@ var TresEnRayaStore = Object.assign({}, EventEmitter.prototype, {
 			setTimeout(function () {
 				alert("GANA el " + turno);
 			}, 100);
-			return valores[1][1] === '0' ? Constants.GANAN0 : Constants.GANANX;
+			return valores[1][1] === 'O' ? Constants.GANAN0 : Constants.GANANX;
 		}
 		for (var i = 0; i < valores.length; i++) {
 			for (var j = 0; j < valores.length; j++) {
@@ -35397,7 +35401,7 @@ var TresEnRayaStore = Object.assign({}, EventEmitter.prototype, {
 TresEnRayaDispatcher.register(function (payload) {
 	switch (payload.type) {
 		case Constants.ActionTypes.JUGAR_POSICION:
-			var nuevoValor = turno === Constants.JUGADORX ? 'X' : '0';
+			var nuevoValor = turno === Constants.JUGADORX ? 'X' : 'O';
 			valoresTablero[payload.x][payload.y] = nuevoValor;
 			partida = TresEnRayaStore.comprobarVictoria(valoresTablero, turno);
 			turno = turno === Constants.JUGADORX ? Constants.JUGADOR0 : Constants.JUGADORX;
@@ -35409,6 +35413,9 @@ TresEnRayaDispatcher.register(function (payload) {
 			valoresTablero = [['-', '-', '-'], ['-', '-', '-'], ['-', '-', '-']];
 			turno = Constants.JUGADORX;
 			TresEnRayaStore.emitChange();
+
+		case Constants.ActionTypes.CONTAR_MOVIMIENTOS:
+
 	}
 });
 

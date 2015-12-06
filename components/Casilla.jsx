@@ -18,7 +18,7 @@ let Casilla = React.createClass({
 		return (
 			<Button bsStyle="primary" style={casillaStyle} className={this.props.valor==="-" ?
 			"clickable":"no_clickable"} onClick={this.casillaClick}>
-			{this.props.valor}
+			<span className="btn-text">{this.props.valor}</span>
 			</Button>
 			)
 	}

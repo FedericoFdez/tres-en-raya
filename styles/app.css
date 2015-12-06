@@ -13,3 +13,7 @@ header, h1 {
 .no_clickable {
 	cursor: not-allowed !important;
 }
+
+.btn-text {
+	font-size: 3em;
+}

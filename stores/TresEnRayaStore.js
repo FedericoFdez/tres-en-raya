@@ -21,13 +21,13 @@ var TresEnRayaStore = Object.assign({}, EventEmitter.prototype, {
 			if ((valores[i][0]!=='-' && valores[i][0]===valores[i][1] && valores[i][1]===valores[i][2]) || //Horizontales
 			    (valores[0][i]!=='-' && valores[0][i]===valores[1][i] && valores[1][i]===valores[2][i])) { //Verticales
 				setTimeout(function(){alert("GANA el "+turno)},100)
-				return valores[i][0]==='0' ? Constants.GANAN0 : Constants.GANANX;
+				return valores[i][0]==='O' ? Constants.GANAN0 : Constants.GANANX;
 			}
 		}
 		if ((valores[0][0]!=='-' && valores[0][0]===valores[1][1] && valores[1][1]===valores[2][2]) || //Diagonal 1
 			(valores[0][2]!=='-' && valores[0][2]===valores[1][1] && valores[1][1]===valores[2][0])) { //Diagonal 2
 			setTimeout(function(){alert("GANA el "+turno)},100)
-			return valores[1][1]==='0' ? Constants.GANAN0 : Constants.GANANX;
+			return valores[1][1]==='O' ? Constants.GANAN0 : Constants.GANANX;
 		}
 		for (var i=0; i<valores.length; i++){
 			for (var j=0; j<valores.length; j++){
@@ -53,7 +53,7 @@ var TresEnRayaStore = Object.assign({}, EventEmitter.prototype, {
 TresEnRayaDispatcher.register(function (payload) {
 	switch (payload.type) {
 		case Constants.ActionTypes.JUGAR_POSICION:
-		let nuevoValor = turno === Constants.JUGADORX ? 'X' : '0';
+		let nuevoValor = turno === Constants.JUGADORX ? 'X' : 'O';
 		valoresTablero[payload.x][payload.y] = nuevoValor;
 		partida = TresEnRayaStore.comprobarVictoria(valoresTablero, turno);
 		turno = turno === Constants.JUGADORX ? Constants.JUGADOR0 : Constants.JUGADORX;
@@ -65,6 +65,9 @@ TresEnRayaDispatcher.register(function (payload) {
 		valoresTablero = [['-', '-', '-'], ['-', '-', '-'], ['-', '-', '-']];
 		turno = Constants.JUGADORX
 		TresEnRayaStore.emitChange();
+
+		case Constants.ActionTypes.CONTAR_MOVIMIENTOS:
+
 	}
 });
 
