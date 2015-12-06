@@ -29,7 +29,8 @@ describe('TresEnRayaStore', function () {
 		expect(valores[0][0]).toEqual('X');
 	});
 	it('reiniciar la partida', function () {
-		callback(actionReiniciarPartida)
+		callback(actionJugarPosicion);
+		callback(actionReiniciarPartida);
 		var valores = TresEnRayaStore.getValores();
 		expect(valores[0][0]).toEqual('-');
 	});
