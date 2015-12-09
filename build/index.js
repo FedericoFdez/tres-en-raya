@@ -110,7 +110,7 @@ var Casilla = React.createClass({
 	render: function render() {
 		return React.createElement(
 			_reactBootstrap.Button,
-			{ bsStyle: 'primary', style: casillaStyle, className: this.props.valor === "-" ? "clickable" : "no_clickable", onClick: this.casillaClick },
+			{ bsStyle: 'primary', style: casillaStyle, className: this.props.valor === "-" && this.props.partida === 0 ? "clickable" : "no_clickable", onClick: this.casillaClick },
 			React.createElement(
 				'span',
 				{ className: 'btn-text' },
@@ -35336,7 +35336,7 @@ module.exports = warning;
 module.exports = require('./lib/React');
 
 },{"./lib/React":281}],414:[function(require,module,exports){
-'use strict';
+"use strict";
 
 var EventEmitter = require('events').EventEmitter;
 
@@ -35413,8 +35413,7 @@ TresEnRayaDispatcher.register(function (payload) {
 			valoresTablero = [['-', '-', '-'], ['-', '-', '-'], ['-', '-', '-']];
 			turno = Constants.JUGADORX;
 			TresEnRayaStore.emitChange();
-
-		case Constants.ActionTypes.CONTAR_MOVIMIENTOS:
+			break;
 
 	}
 });
