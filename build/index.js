@@ -110,7 +110,7 @@ var Casilla = React.createClass({
 	render: function render() {
 		return React.createElement(
 			_reactBootstrap.Button,
-			{ bsStyle: 'primary', style: casillaStyle, className: this.props.valor === "-" && this.props.partida === 0 ? "clickable" : "no_clickable", onClick: this.casillaClick },
+			{ bsStyle: 'primary', style: casillaStyle, disabled: this.props.valor === "-" && this.props.partida === 0 ? false : true, onClick: this.casillaClick },
 			React.createElement(
 				'span',
 				{ className: 'btn-text' },

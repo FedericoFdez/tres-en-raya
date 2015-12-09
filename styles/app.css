@@ -6,14 +6,6 @@ header, h1 {
 	text-align: center;
 }
 
-.clickable {
-	cursor: pointer;
-}
-
-.no_clickable {
-	cursor: not-allowed !important;
-}
-
 .btn-text {
 	font-size: 3em;
 }
