@@ -67,8 +67,7 @@ TresEnRayaDispatcher.register(function (payload) {
 		valoresTablero = [['-', '-', '-'], ['-', '-', '-'], ['-', '-', '-']];
 		turno = Constants.JUGADORX
 		TresEnRayaStore.emitChange();
-
-		case Constants.ActionTypes.CONTAR_MOVIMIENTOS:
+		break;
 
 	}
 });
